@@ -1,0 +1,451 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Theme transition ─────────────────────────────────────────── */
+*, *::before, *::after {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.2s ease;
+}
+
+/* Exclude transitions that shouldn't animate */
+.no-transition, .no-transition * {
+  transition: none !important;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* ── Dark mode (default) ── */
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: #0f172a;
+    color: #f8fafc;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ── Light mode ── */
+  html:not(.dark) {
+    color-scheme: light;
+  }
+
+  html:not(.dark) body {
+    background-color: #f1f5f9;
+    color: #0f172a;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  /* ── Scrollbar dark ── */
+  .dark ::-webkit-scrollbar { width: 6px; }
+  .dark ::-webkit-scrollbar-track { background: #0f172a; }
+  .dark ::-webkit-scrollbar-thumb { background: #8b5cf6; border-radius: 3px; }
+  .dark ::-webkit-scrollbar-thumb:hover { background: #7c3aed; }
+
+  /* ── Scrollbar light ── */
+  :not(.dark) ::-webkit-scrollbar { width: 6px; }
+  :not(.dark) ::-webkit-scrollbar-track { background: #e2e8f0; }
+  :not(.dark) ::-webkit-scrollbar-thumb { background: #8b5cf6; border-radius: 3px; }
+  :not(.dark) ::-webkit-scrollbar-thumb:hover { background: #7c3aed; }
+}
+
+@layer components {
+  /* ── Glass effects ── */
+  .glass {
+    background: rgba(30, 41, 59, 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(139, 92, 246, 0.15);
+  }
+
+  html:not(.dark) .glass {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+  }
+
+  .glass-dark {
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(139, 92, 246, 0.1);
+  }
+
+  html:not(.dark) .glass-dark {
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+
+  /* ── Buttons ── */
+  .btn-primary {
+    @apply bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 shadow-lg hover:shadow-violet-500/25 hover:scale-105 active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 shadow-lg hover:shadow-cyan-500/25 hover:scale-105 active:scale-95;
+  }
+
+  .btn-outline {
+    @apply border border-violet-500/50 text-violet-600 dark:text-violet-400 hover:bg-violet-500/10 font-semibold px-6 py-3 rounded-full transition-all duration-300 hover:border-violet-400 hover:scale-105 active:scale-95;
+  }
+
+  /* ── Get Started button — hero futuristic pill ── */
+  .btn-get-started {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 32px;
+    border-radius: 9999px;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 0.02em;
+    color: #ffffff;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    overflow: hidden;
+    isolation: isolate;
+
+    /* Gradient fill */
+    background: linear-gradient(110deg, #7c3aed 0%, #a855f7 45%, #06b6d4 100%);
+    background-size: 200% 200%;
+    background-position: 0% 50%;
+
+    /* Layered glow shadow */
+    box-shadow:
+      0 0 0 1px rgba(139, 92, 246, 0.4),
+      0 4px 20px rgba(124, 58, 237, 0.4),
+      0 8px 40px rgba(6, 182, 212, 0.15),
+      0 1px 3px rgba(0, 0, 0, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+
+    transition:
+      transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+      box-shadow 0.3s ease,
+      background-position 0.5s ease;
+  }
+
+  .btn-get-started:hover {
+    transform: scale(1.07) translateY(-2px);
+    background-position: 100% 50%;
+    box-shadow:
+      0 0 0 1px rgba(139, 92, 246, 0.6),
+      0 6px 30px rgba(124, 58, 237, 0.55),
+      0 12px 50px rgba(6, 182, 212, 0.3),
+      0 2px 6px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.08);
+  }
+
+  .btn-get-started:active {
+    transform: scale(0.97) translateY(0px);
+    transition-duration: 0.1s;
+    box-shadow:
+      0 0 0 1px rgba(139, 92, 246, 0.4),
+      0 2px 12px rgba(124, 58, 237, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  }
+
+  /* Animated glow ring that pulses */
+  .btn-get-started::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 9999px;
+    background: linear-gradient(110deg, #7c3aed, #a855f7, #06b6d4, #7c3aed);
+    background-size: 300% 300%;
+    z-index: -1;
+    opacity: 0;
+    animation: glow-ring-spin 3s linear infinite;
+    transition: opacity 0.3s ease;
+  }
+
+  .btn-get-started:hover::before {
+    opacity: 1;
+  }
+
+  /* Shimmer sweep */
+  .btn-get-started-shimmer {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(
+      108deg,
+      transparent 25%,
+      rgba(255, 255, 255, 0.22) 50%,
+      transparent 75%
+    );
+    background-size: 250% 100%;
+    background-position: -100% 0;
+    pointer-events: none;
+    transition: background-position 0.6s ease;
+  }
+
+  .btn-get-started:hover .btn-get-started-shimmer {
+    background-position: 200% 0;
+  }
+
+  /* Arrow icon nudge */
+  .btn-get-started .btn-gs-arrow {
+    display: inline-flex;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .btn-get-started:hover .btn-gs-arrow {
+    transform: translateX(4px);
+  }
+
+  /* Compact navbar variant */
+  .btn-get-started-sm {
+    padding: 8px 22px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.01em;
+  }
+
+  /* Large hero variant */
+  .btn-get-started-lg {
+    padding: 18px 44px;
+    font-size: 1.125rem;
+    letter-spacing: 0.025em;
+  }
+
+  /* ── Sign In button — futuristic pill ── */
+  .btn-signin {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 22px;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.01em;
+    color: #ffffff;
+    background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 40%, #0891b2 100%);
+    box-shadow:
+      0 0 0 1px rgba(139, 92, 246, 0.35),
+      0 4px 15px rgba(109, 40, 217, 0.35),
+      0 1px 3px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    overflow: hidden;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.25s ease,
+                background 0.25s ease;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .btn-signin:hover {
+    transform: scale(1.06) translateY(-1px);
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 40%, #06b6d4 100%);
+    box-shadow:
+      0 0 0 1px rgba(139, 92, 246, 0.5),
+      0 6px 25px rgba(139, 92, 246, 0.45),
+      0 2px 8px rgba(6, 182, 212, 0.2),
+      0 1px 3px rgba(0, 0, 0, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  .btn-signin:active {
+    transform: scale(0.97) translateY(0px);
+    box-shadow:
+      0 0 0 1px rgba(139, 92, 246, 0.4),
+      0 2px 10px rgba(139, 92, 246, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  /* Shimmer sweep on hover */
+  .btn-signin-shimmer {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.18) 50%,
+      transparent 70%
+    );
+    background-size: 200% 100%;
+    background-position: -100% 0;
+    transition: background-position 0.5s ease;
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  .btn-signin:hover .btn-signin-shimmer {
+    background-position: 200% 0;
+  }
+
+  /* ── Cards ── */
+  .card {
+    @apply bg-white/80 dark:bg-slate-800/60 backdrop-blur-xl border border-slate-200/80 dark:border-slate-700/50 rounded-2xl shadow-sm dark:shadow-none;
+  }
+
+  .card-hover {
+    @apply card hover:border-violet-400/40 dark:hover:border-violet-500/40 hover:shadow-md hover:shadow-violet-500/10 transition-all duration-300;
+  }
+
+  /* ── Inputs ── */
+  .input-field {
+    @apply w-full bg-slate-100 dark:bg-slate-800/80 border border-slate-300 dark:border-slate-700/50 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 rounded-xl px-4 py-3 focus:outline-none focus:border-violet-500/70 focus:ring-2 focus:ring-violet-500/20 transition-all duration-200;
+  }
+
+  /* ── Gradient text ── */
+  .gradient-text {
+    @apply bg-gradient-to-r from-violet-500 via-purple-500 to-cyan-500 bg-clip-text text-transparent;
+  }
+
+  /* ── Skeleton ── */
+  .skeleton {
+    border-radius: 8px;
+  }
+
+  .dark .skeleton {
+    background: linear-gradient(90deg, #1e293b 25%, #334155 50%, #1e293b 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  html:not(.dark) .skeleton {
+    background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  /* ── Sidebar links ── */
+  .sidebar-link {
+    @apply flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-violet-500/10 transition-all duration-200 cursor-pointer;
+  }
+
+  .sidebar-link.active {
+    @apply text-violet-700 dark:text-white bg-violet-500/15 dark:bg-violet-500/20 border border-violet-400/30 dark:border-violet-500/30;
+  }
+
+  /* ── Page backgrounds ── */
+  .page-bg {
+    @apply bg-slate-50 dark:bg-[#0f172a] min-h-screen;
+  }
+
+  /* ── Section backgrounds ── */
+  .section-bg {
+    @apply bg-white dark:bg-slate-800/40;
+  }
+
+  /* ── Text helpers ── */
+  .text-primary {
+    @apply text-slate-900 dark:text-white;
+  }
+
+  .text-secondary {
+    @apply text-slate-600 dark:text-slate-400;
+  }
+
+  .text-muted {
+    @apply text-slate-400 dark:text-slate-500;
+  }
+
+  /* ── Dividers ── */
+  .divider {
+    @apply border-slate-200 dark:border-slate-700/50;
+  }
+}
+
+@layer utilities {
+  .text-glow {
+    text-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+  }
+
+  .box-glow {
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.2);
+  }
+
+  .box-glow-cyan {
+    box-shadow: 0 0 30px rgba(6, 182, 212, 0.2);
+  }
+}
+
+/* ── Particle animation ── */
+@keyframes particle-float {
+  0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.3; }
+  33% { transform: translateY(-30px) translateX(20px) rotate(120deg); opacity: 0.6; }
+  66% { transform: translateY(20px) translateX(-20px) rotate(240deg); opacity: 0.4; }
+}
+
+.particle {
+  animation: particle-float linear infinite;
+}
+
+/* ── Gradient border ── */
+.gradient-border {
+  position: relative;
+  background: linear-gradient(#ffffff, #ffffff) padding-box,
+              linear-gradient(135deg, #8b5cf6, #06b6d4) border-box;
+  border: 1px solid transparent;
+}
+
+.dark .gradient-border {
+  background: linear-gradient(#1e293b, #1e293b) padding-box,
+              linear-gradient(135deg, #8b5cf6, #06b6d4) border-box;
+}
+
+/* ── Shimmer animation ── */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ── Glow ring spin (Get Started border) ── */
+@keyframes glow-ring-spin {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ── Subtle float for hero CTA ── */
+@keyframes float-subtle {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-5px); }
+}
+
+.btn-get-started-hero {
+  animation: float-subtle 3.5s ease-in-out infinite;
+}
+
+.btn-get-started-hero:hover,
+.btn-get-started-hero:active {
+  animation-play-state: paused;
+}
+
+/* ── Select element theming ── */
+html:not(.dark) select.input-field option {
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+.dark select.input-field option {
+  background-color: #1e293b;
+  color: #f8fafc;
+}
+
+/* ── Chart.js light mode grid ── */
+html:not(.dark) .chartjs-render-monitor {
+  filter: none;
+}
