@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Pixora AI — Text to Image Generation SaaS
 
 A full-stack AI image generation platform built with the MERN stack.
@@ -50,3 +51,7 @@ npm run dev
 - Auth: JWT + bcrypt
 - AI: Pollinations AI (free)
 - Payments: Razorpay (test mode)
+=======
+# Text-to-Image-Generation
+An AI-powered Text-to-Image Generation platform that transforms text prompts into creative images using AI models and modern web technologies.
+>>>>>>> c67c00c583c286496731d15d0d0ae18ce5402345
